@@ -99,11 +99,52 @@ As an **<u>extension</u>** to the simplest form, a **<u>controller can be added<
 * By using the windshield wiper motor's "park" functionality, the controller can also more **precisely set the Respiratory Rate**, allowing for a rest/null portion of the breath.
 * The **Tidal Volume** is still set mechanically by changing the position/proximity of the bag to the pusher arm.
 
+## Parts List
+
+In addition to the 3D printed parts (in the `PrintFiles` directory), you'll need a few other things:
+
+* **Windshield Wiper Motor**. You can use pretty much any wiper motor, but you'll need to modify the design to properly hold the motor in place and attach to the *WiperArm*. 
+
+  So far, wiper motors for these vehicles have been implemented/tested:
+
+  * **Dodge Ram (1997-1999)**: *Cardone 85-3000*, *Cardone 40-3000*, or similar.
+  * more to come as parts are tested...
+
+* **4 x 608 Ball Bearings**: #608ZZ, #6082RS, or similar.
+
+* **4 x M3x(5-8mm long) socket head bolts**: These hold the bearings in place. 
+
+* **24 x M3x(12-15mm long) socket head bolts**: These are used to fasten all of the 3D printed parts together.
+
+* **6 x M3 Locknuts:** These secure the adjustment posts that hold the BVM at a specific height.
+
+* **6 x M3 Washers**: These are used under the head of the bolts with locknuts to spread out the force when tightened.
+
+* **1 x M8x(40-45mm long) hex head bolt**: This provides the primary fulcrum/shaft for the pusher arm.
+
+* **1 x M8 Locknut**: This holds the M8 bolt in place.
+
+* **2 x M5x(20-30mm long) socket head bolts**: These are used in the center/shafts of the pusher arm linkages to secures the bearings to the driven parts.
+
+* **2 x M5 Locknuts**: These hold the M5 bolts in place.
+
+* **1" wide sew-on velcro nylon strap**: This wraps over the top and secures the BVM in place.
+
+* **1 x Heavy Duty Rubber Band**: This holds the neck of the BVM in place so it doesn't drift as the devices runs.
+
 
 
 ## Mechanical Assembly
 
-In progress.
+Note: This design leverages the ability for printed parts to have self-tapping holes (using a bolt directly without pre-cut threads). This seems to work quite well, but **take care not to over-tighten bolts into 3D printed parts** to reduce the risk of stripping the plastic.
+
+1. To assemble the LRVent, start by bolting together the *FrameSideWM_xyz* (specific to the wiper motor you are using) to the *FrameBack* and the *FrameBase* with 5 x M3x(12-15mm long) bolts.
+2. Next, bolt on the Wiper Motor to the *FrameSideWM_xyz* with the motor's supplied fasteners.
+3. Press a 608 bearing into the *WiperArm*, and secure in place with 2 x M3x(5-8mm) bolts.
+4. Press 3 x 608 bearings into the pusher arm. Secure the single bearing near the pushing end with 2 x M3x(5-8mm) bolts.
+5. ... (in progress)
+
+
 
 ## Electrical Assembly
 
