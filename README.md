@@ -103,7 +103,7 @@ As an **<u>extension</u>** to the simplest form, a **<u>controller can be added<
 
 In addition to the 3D printed parts (in the `PrintFiles` directory), you'll need a few other things:
 
-* **Windshield Wiper Motor**. You can use pretty much any wiper motor, but you'll need to modify the design to properly hold the motor in place and attach to the *WiperArm*. 
+* **1 x Windshield Wiper Motor**. You can use pretty much any wiper motor, but you'll need to modify the design to properly hold the motor in place and attach to the *WiperArm*. 
 
   So far, wiper motors for these vehicles have been implemented/tested:
 
@@ -124,13 +124,15 @@ In addition to the 3D printed parts (in the `PrintFiles` directory), you'll need
 
 * **1 x M8 Locknut**: This holds the M8 bolt in place.
 
-* **2 x M5x(20-30mm long) socket head bolts**: These are used in the center/shafts of the pusher arm linkages to secures the bearings to the driven parts.
+* **2 x M5x(15-20mm long) socket head bolts**: These are used in the center/shafts of the pusher arm linkages to secures the bearings to the driven parts.
 
 * **2 x M5 Locknuts**: These hold the M5 bolts in place.
 
 * **1" wide sew-on velcro nylon strap**: This wraps over the top and secures the BVM in place.
 
 * **1 x Heavy Duty Rubber Band**: This holds the neck of the BVM in place so it doesn't drift as the devices runs.
+
+* **1 x Bag-Valve-Mask for testing**: You may be able to find a CPR training BVM which should also work.
 
 
 
@@ -141,8 +143,23 @@ Note: This design leverages the ability for printed parts to have self-tapping h
 1. To assemble the LRVent, start by bolting together the *FrameSideWM_xyz* (specific to the wiper motor you are using) to the *FrameBack* and the *FrameBase* with 5 x M3x(12-15mm long) bolts.
 2. Next, bolt on the Wiper Motor to the *FrameSideWM_xyz* with the motor's supplied fasteners.
 3. Press a 608 bearing into the *WiperArm*, and secure in place with 2 x M3x(5-8mm) bolts.
-4. Press 3 x 608 bearings into the pusher arm. Secure the single bearing near the pushing end with 2 x M3x(5-8mm) bolts.
-5. ... (in progress)
+4. Press 3 x 608 bearings into the *PusherArm*. Secure the single bearing near the pushing end with 2 x M3x(5-8mm) bolts.
+5. Use an M5x(15-20mm long) bolt and M5 locknut to secure the *PushLink* to the *PusherArm*. Note that the *PusherArm* is symmetric.
+6. Use an M5x(15-20mm long) bolt and M5 locknut to secure the *PushLink* to the *WiperArm*.
+7. If you are planning to add a controller (for more precisely controlling the breathing rate), make sure that the wiper motor is in the home/resting position. You may need to power it on and detect when the switch activates. See your wiper motor's wiring instructions for more info.
+8. Holding the *PusherArm* and *PushLink* assembly out of the way, bolt the *WiperArm* onto the wiper motor with its supplied hardware. Tighten it until the entire *PusherArm* assembly is roughly centered in the *FrameBase*. Be careful not to over-tighten as this can cause the shaft of the wiper motor to interfere as it rotates.
+9. Bolt on the *FrameSidePassive* to the *FrameBase* and *FrameBack* using 5 x M3x(12-15mm long) bolts.
+10. Align the two bearings at the pivot of the *PusherArm* with the top hole of the frame sides. Insert the M8x(40-45mm long) bolt into the top hole (starting from the *FrameSidePassive*). Use the two *M8Washer_1mm* spacers between the *PusherArm* and the two sides. Add the M8 locknut to secure the M8 bolt in place.
+11. Being careful not to pinch yourself, you should now be able to fully test the wiper motor and pusher assembly. Powering the motor should produce a smooth motion of the *PusherArm* without any interference or binding.
+12. Now assemble the two stands that the BVM will rest upon. For each side, slide the *StandBVMTailTop* into the *StandBVMTailBot* and use an M3x(12-15mm) bolt with an M3 washer under the head and fasten it to an M3 locknut (which should press into the pocked on the back side of *StandBVMTailBot*).
+13. For each side, attach either the *StandBVMTailHoldBase* or *StandBVMTailHoldNeck* using 2 x M3x(12-15mm) bolt with an M3 washer under the head and fasten it to an M3 locknut from the sides. Tighten until the holders will hold their position but can still be adjusted with a firm push.
+14. Make a 1" wide velcro strap to hold the BVM in place as desired. This gets threaded through the two slots on either end of the FrameBase to hold the BVM in place and provide counter-pressure as the *PusherArm* pressed on it.
+15. To test the LRVent:
+    1. Place a BVM into the holders.
+    2. Use a heavy duty rubber band to hold the neck of the BVM in place.
+    3. Fasten the velcro strap so that it firmly hold the BVM.
+    4. Make sure hands are clear of any moving parts.
+    5. Apply power to the motor and ensure the LRVent is operating as expected.
 
 
 
