@@ -10,7 +10,7 @@ Patients with COVID-19 in serious or critical condition often require assisted b
 
 <img src="./Images/2020-04-11 - LRVentMk2 CAD view.png" style='max-height:240px;'/>
 
-The basic structure of the device is intended to span a large range of parts depending on what can be found locally (various fasteners, bearings, motors, and electronics) and can be easily extended to accommodate new components as needed. It is also designed to span a wide range of technical capabilities (from simply plugging in power to a motor, up to Arduino-level software and electronics to add basic controls for breathing rate and inspiratory/expiratory ratio).
+The basic structure of the device is intended to span a large range of parts depending on what can be found locally (various fasteners, motors, and electronics) and can be easily extended to accommodate new components as needed. It is also designed to span a wide range of technical capabilities (from simply plugging in power to a motor, up to Arduino-level software and electronics to add basic controls for breathing rate and inspiratory/expiratory ratio).
 
 As with any medical device hack, this has been created with the intention of being as safe as possible given the harsh constraints of the current global pandemic and ventilator shortage, but is **UNCERTIFIED, HIGHLY EXPERIMENTAL, and UNTESTED ON HUMANS.** As such, any potential use scenario would also require **legal waivers to use uncertified/untested non-medical devices** and **significant additional patient monitoring by medical professionals and certified diagnostic equipment** to reduce the risk of serious consequences in the event that the device fails to operate as intended by doctors. The **core contributors to this project are not medical professionals**.
 
@@ -66,7 +66,7 @@ Tenets for the LRVent design:
   * <u>Splitting the design into modular pieces</u> that can fit a wide range of parts enables more people to make devices. For example, various windshield wiper motors have different bolt patterns to attach them to cars, and thus where the motor mounts to LRVent should be a part that can be selected/modified to fit.
 * Span a **wide range of skillsets.**
   * A <u>novice maker</u> should be able to buy/print the relevant parts, plug in power, and have the device start pumping. It may be less than optimal, but from there, further hacks (like mechanically spacing the BVM away from the stand to change the tidal/breath volume) could be employed.
-  * For <u>more advanced makers</u>, using an additional Arduino-capable microcontroller, a couple FET transistors, a couple potentiometers, and a soldering iron should be enough to quickly build/program a basic controller to allow for adjusting the breathing rate and the inspiratory/expiratory ratio.
+  * For <u>more advanced makers</u>, using an additional Arduino-capable microcontroller, a couple FET transistors, a couple potentiometers, and a soldering iron should be enough to quickly build/program a basic controller to allow for adjusting breathing rate and inspiratory/expiratory ratio.
 * Always **allow for manual intervention.**
   * The BVM should <u>remain accessible to hand pumping</u> when needed. If the motor stops and medical staff are notified (by other connected devices), a person should be able to immediately begin pumping by hand to continue the supply of air while the issue is resolved. Note that this may be partially at odds with avoiding a "pinch point" where a user could inadvertently place their hand in the device's motor/actuation path and injure themselves (which must be avoided as much as possible), but access to the patient's air supply is given highest priority.
 * **Completely open/free for the world.**
@@ -76,7 +76,7 @@ Tenets for the LRVent design:
 
 ## LRVent Operation
 
-Like many bag-squeezer ventilator projects that have come before, the idea is quite simple; repeatedly squeeze a semi-rigid bag (BVM / Ambu bag) to deliver air to the patient. 
+Like many bag-squeezer ventilator projects that have come before [[1](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf), [2](http://oedk.rice.edu/Sys/PublicProfile/47585242/1063096), [3](https://gitlab.com/open-source-ventilator/ventilator/OpenLung)], the idea is quite simple; repeatedly squeeze a semi-rigid bag (BVM / Ambu bag) to deliver air to the patient. 
 
 * **Respiratory rate** (*RR*) is controlled by how often/quickly the bag is squeezed. This is typically set in the range of 8-16 breaths/min, but with COVID-19 patients, using a slightly faster breathing rate (*RR* between 12-20 breaths/min) with less volume seems preferable/likely.
 * **Tidal volume** (*Vt*, the amount of air per breath) is controlled how far the bag is squeezed. This is typically set in the range of 350-450mL, but with COVID-19 patients, using a slightly faster breathing rate at lower a *Vt* seems preferable/likely (closer to 200-300mL).
@@ -138,7 +138,7 @@ In addition to the 3D printed parts (in the `PrintFiles` directory), you'll need
 
 ## Mechanical Assembly
 
-Note: This design leverages the ability for printed parts to have self-tapping holes (using a bolt directly without pre-cut threads). This seems to work quite well, but **take care not to over-tighten bolts into 3D printed parts** to reduce the risk of stripping the plastic.
+Note: This design leverages the ability for printed parts to include self-tapping holes (using a bolt directly without pre-cut threads). This seems to work quite well, but **take care not to over-tighten bolts into 3D printed parts** to reduce the risk of stripping the plastic.
 
 1. To assemble the LRVent, start by bolting together the *FrameSideWM_xyz* (specific to the wiper motor you are using) to the *FrameBack* and the *FrameBase* with 5 x M3x(12-15mm long) bolts.
 2. Next, bolt on the Wiper Motor to the *FrameSideWM_xyz* with the motor's supplied fasteners.
