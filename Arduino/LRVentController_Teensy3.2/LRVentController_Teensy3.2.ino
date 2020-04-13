@@ -31,7 +31,7 @@
 
 uint32_t      breathingPeriodMillis = 60000 / 13;
 unsigned long lastBreathStartMillis = 0;
-unsigned long motoMinMillisToCycle  = 1200; // fastest motor can cycle around/2 (to ensure we stay on past wiper switch).
+unsigned long motorMinMillisToCycle = 1200; // fastest motor can cycle around/2 (to ensure we stay on past wiper switch).
 bool          motorIsDriving        = false;
 
 // ----------
@@ -91,8 +91,8 @@ void loop() {
     digitalWrite(PIN_WIPER_MOTOR_FET_PWM_OUTPUT, HIGH);
     motorIsDriving        = true;
     lastBreathStartMillis = nowMillis;
-  } else if (nowMillis - lastBreathStartMillis < motoMinMillisToCycle) {
-    // motor stays on at least motoMinMillisToCycle... do nothing.
+  } else if (nowMillis - lastBreathStartMillis < motorMinMillisToCycle) {
+    // motor stays on at least motorMinMillisToCycle... do nothing.
   } else {
     // motor has driven at least the min cycle time, but not ready to cycle again.
     if (motorIsDriving) {
@@ -108,7 +108,7 @@ void loop() {
   else if(loopFrame%300 == 150)  digitalWrite(PIN_HEARTBEAT_LED, LOW);
   // --
   if(loopFrame%50 == 1){
-    SerialLRVent.println(60000.0 / breathingPeriodMillis, DEC);
+    SerialLRVent.println(60000.0 / breathingPeriodMillis, 2); // log breathing rate for debugging.
   }
   // --
   loopFrame++;
