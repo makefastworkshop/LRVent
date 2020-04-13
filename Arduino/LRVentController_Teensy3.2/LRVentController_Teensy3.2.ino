@@ -68,7 +68,7 @@ uint16_t readRateValPercent() {
   for (int i = 0; i < 16; i++) {
     valSum += analogRead(PIN_KNOB_RATE_ANA_INPUT);
   }
-  uint16_t pctVal  = (valSum * 100 / 1024) / 16;
+  uint16_t pctVal  = (valSum * 100 / 1023) / 16;
   return pctVal;
 }
 
