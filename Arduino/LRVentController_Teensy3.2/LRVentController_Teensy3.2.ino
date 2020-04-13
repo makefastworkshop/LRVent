@@ -1,10 +1,14 @@
 // ------------------------------------------
 // LRVent: Last Resort Ventilator Controller
 //
-// This code is a best attempt at creating a simple, reliable controller
-// for the LRVent using a windshield wiper motor to actuate a BVM. This is
-// EXPERIMENTAL, UNCERTIFIED, and NOT TESTED ON HUMANS. Use at your own risk.
+// This is a first attempt at creating a simple, reliable controller for the
+// LRVent using a windshield wiper motor to actuate a BVM. This is EXPERIMENTAL,
+// UNCERTIFIED, and NOT TESTED ON HUMANS. Use at your own risk.
 // The developers take NO RESPONSIBILITY and are NOT LIABLE in any event.
+//
+// This code is intetionally very small and easy to follow. Take a few minutes 
+// and look over every line and make sure you understand it and it fits your
+// electrical connections (all of the PIN_ definitions) and system needs.
 //
 // questions? hello@makefastoworkshop.com
 // ------------------------------------------
@@ -22,9 +26,6 @@
 
 #define BREATHING_BPM_MAX               18
 #define BREATHING_BPM_MIN                8
-
-//#define BREATHING_PERIOD_MS_MAX      (60000 /  8)
-//#define BREATHING_PERIOD_MS_MIN      (60000 / 18)
 
 // ----------
 
@@ -48,20 +49,22 @@ void setup() {
   digitalWrite(PIN_KNOB_RATE_VCC_OUTPUT, HIGH);
   // --
   pinMode(PIN_HEARTBEAT_LED, OUTPUT);
+  digitalWrite(PIN_HEARTBEAT_LED, HIGH);
   // --
   analogReadResolution(10); // 10 bits --> analog values will be [0,1023]
   // --
   SerialLRVent.begin(115200);
-  // while (!SerialLRVent); 
   // --
   delay(2000);
   SerialLRVent.println("LRVent Running...");
+  digitalWrite(PIN_HEARTBEAT_LED, LOW);
   // --
   adjustParamsBasedOnKnobs();
 }
 
 uint16_t readRateValPercent() {
   int valSum = 0;
+  // average ADC value over 16 samples and return in range 0-100.
   for (int i = 0; i < 16; i++) {
     valSum += analogRead(PIN_KNOB_RATE_ANA_INPUT);
   }

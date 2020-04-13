@@ -169,7 +169,7 @@ Note: This design leverages the ability for printed parts to include self-tappin
 
 The simplest way to drive the LRVent's windshield wiper motor is with a voltage controlled power supply (for example, search for "dc variable power supply" on Amazon). While most wiper motors are specified for 12 Volt operation, they can be driven with a lower voltage to decrease the output speed.
 
-Driving the wiper motor without precise timing means that the respiration rate will be approximate and may vary over time (as the motor warms up, as a patient's condition evolves, etc.). Using a controller (see below) great improves the timing and can be run from a fixed voltage supply, but does require a bit of soldering and programming to hook everything together.
+Driving the wiper motor without precise timing means that the respiration rate will be approximate and may vary over time (as the motor warms up, as a patient's condition evolves, etc.). Using a controller (see below) greatly improves the timing and can be run from a fixed voltage supply, but does require a bit of soldering and programming to hook everything together.
 
 There are thousands of wiper motors, and the exact specifications of the motor you choose may have different needs than those already tested with this project. Ideally, **if powering LRVent directly, use a controlled DC supply to allow for quick adjustment**. 
 
