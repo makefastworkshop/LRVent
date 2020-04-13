@@ -8,7 +8,7 @@ Patients with COVID-19 in serious or critical condition often require assisted b
 
 **This project aims to provide a very basic, last resort ventilator design that can be built quickly with locally sourced parts (from hardware and automotive stores) and maker-level tools (hand tools and a 3D printer).** 
 
-<img src="./Images/2020-04-11 - LRVentMk2 CAD view.png" style='max-height:240px;'/>
+<img src="./Images/2020-04-11 - LRVentMk2 CAD view.png" style='max-height:240px;'/><img src="./Images/LRVent-WithoutBVM.png" style='max-height:240px;'/><img src="./Images/LRVent-WithBVM.png" style='max-height:240px;'/><img src="./Images/LRVent-Side.png" style='max-height:240px;'/><img src="./Images/LRVent-PressingBVM.png" style='max-height:240px;'/><img src="./Images/LRVentController_using.png" style='max-height:240px;'/>
 
 The basic structure of the device is intended to span a large range of parts depending on what can be found locally (various fasteners, motors, and electronics) and can be easily extended to accommodate new components as needed. It is also designed to span a wide range of technical capabilities (from simply plugging in power to a motor, up to Arduino-level software and electronics to add basic controls for breathing rate and inspiratory/expiratory ratio).
 
@@ -153,7 +153,7 @@ Note: This design leverages the ability for printed parts to include self-tappin
 11. Being careful not to pinch yourself, you should now be able to fully test the wiper motor and pusher assembly. Powering the motor should produce a smooth motion of the *PusherArm* without any interference or binding.
 12. Now assemble the two stands that the BVM will rest upon. For each side, slide the *StandBVMTailTop* into the *StandBVMTailBot* and use an M3x(12-15mm) bolt with an M3 washer under the head and fasten it to an M3 locknut (which should press into the pocked on the back side of *StandBVMTailBot*).
 13. For each side, attach either the *StandBVMTailHoldBase* or *StandBVMTailHoldNeck* using 2 x M3x(12-15mm) bolt with an M3 washer under the head and fasten it to an M3 locknut from the sides. Tighten until the holders will hold their position but can still be adjusted with a firm push.
-14. Make a 1" wide velcro strap to hold the BVM in place as desired. This gets threaded through the two slots on either end of the FrameBase to hold the BVM in place and provide counter-pressure as the *PusherArm* pressed on it.
+14. Make a 1" wide velcro strap to hold the BVM in place as desired. This gets threaded through the two slots on either end of the *FrameBase* to hold the BVM in place and provide counter-pressure as the *PusherArm* pressed on it.
 15. To test the LRVent:
     1. Place a BVM into the holders.
     2. Use a heavy duty rubber band to hold the neck of the BVM in place.
@@ -165,16 +165,51 @@ Note: This design leverages the ability for printed parts to include self-tappin
 
 ## Electrical Assembly
 
-In progress.
+### Approximate Breathing Rate (simplest)
+
+The simplest way to drive the LRVent's windshield wiper motor is with a voltage controlled power supply (for example, search for "dc variable power supply" on Amazon). While most wiper motors are specified for 12 Volt operation, they can be driven with a lower voltage to decrease the output speed.
+
+Driving the wiper motor without precise timing means that the respiration rate will be approximate and may vary over time (as the motor warms up, as a patient's condition evolves, etc.). Using a controller (see below) great improves the timing and can be run from a fixed voltage supply, but does require a bit of soldering and programming to hook everything together.
+
+There are thousands of wiper motors, and the exact specifications of the motor you choose may have different needs than those already tested with this project. Ideally, **if powering LRVent directly, use a controlled DC supply to allow for quick adjustment**. 
+
+But in general, **a 4 to 8 Volt supply (with the ability to supply at least 3 Amps of current) should be adequate**. Since there are many 5Volt (3Amp+) supplies for USB charging, you may want to start there. Note that most wiper motors have a High and Low connection that can offer two speeds using the same supply voltage.
+
+### Controlled Breathing Rate (more complex)
+
+<img src="./Images/LRVentController_wiring.png" style='max-height:240px;'/>
+
+Using a minimal set of maker-level electronics (an Arduino and some basic soldering), the breathing rate of the LRVent can be more precisely controlled. 
+
+The electronics, interface, and programming logic could all be greatly expanded upon to produce a more robust and fail-safe device, but this project will focus on the baseline set of components needed to control the breathing rate. Since LRVent already assumes the patient will be closely monitored by medical professionals and other automated medical equipment, the goal is to provide a functional system with the least amount of secondary features that could potentially introduce programming/wiring bugs or make it more complicated to operate/adjust by a doctor.
+
+The **primary electrical components** needed to allow for a controlled breathing rate are:
+
+* An Arduino-capable microcontroller (Arduino, Teensy, Metro, ESP32, etc.).
+* A potentiometer/knob (to allow the user to adjust the breathing rate).
+* A simple high-current motor driver (like a basic high-power FET, or half of an H-Bridge).
+
+Ideally, the wiper motor's integrated switch could be sensed by the microcontroller to know precisely when the motor is in the "home" position after each complete breath, but the switch on the motor can be very noisy and (from experience) **the switch can sometimes produce voltage spikes as the motor is powered which can burn out the microcontroller**. 
+
+As such, it seems preferable to use the integrated wiper switch as a momentary pass-through to allow the motor to continue running until it reaches the home position (at which point it will pause until briefly powered by the microcontroller). By using the microcontroller as a basic controllable timer, there's less room for coding error or a false sense of security. The LRVent is a last resort and functionally basic -- medical personnel should closely monitor the patient at all times and assume it could stop working without notice. It is a windshield wiper motor after all.
+
+**The wiring is very basic:**
+
+* Solder the leads of the potentiometer to the microcontroller (making sure it is connected to an analog input / ADC).
+* Solder the FET/Motor driver to an output on the microcontroller.
+  * Note if using a FET:  since the wiper motor will likely need a higher voltage than the microcontroller (12V compared to 3.3V or 5V), it is easiest to control the Ground/negative side of the motor's power instead of the positive side. That means that the motor can be directly powered from the positive side of the voltage supply, and the ground lead can be interrupted/controlled by the microcontroller. The wiper motor's integrated switch can then be connected such that ground is supplied to the motor (this completing the circuit to keep it going) when the motor is not in the "home" position.
+
+
 
 ## Programming 
 
-In progress.
+If using a microcontroller to precisely control the breathing rate of the LRVent, you'll need to program it with some basic code that reads the knob and updates the interval for driving the wiper motor.
 
-## Testing
+The `Arduino` directory contains example code for programming an Arduino-capable board. 
 
-In progress.
+* Open the appropriate `.ino` file in the Arduino code editor.
+* Make any modifications to the code (make sure you set the constants such as  `PIN_WIPER_MOTOR_FET_PWM_OUTPUT` to the correct values for your board and attached circuitry).
+* Connect/select your board and serial port.
+* Click Upload.
 
-## Modifications
-
-In progress.
+Like all aspects of the LRVent project, the software is a best effort, but it is in no way certified for use as a medical device. Use at your own risk. In no event will the contributors of this project be liable.
